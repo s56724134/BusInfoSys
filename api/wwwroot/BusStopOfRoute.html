@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js"></script>
+        <link rel="stylesheet" href="./css/BusRouteInput.css">
+        <link rel="stylesheet" href="./css/BusStopOfRoute.css">
+        <link rel="stylesheet" href="./css/BusRealTimeNearStop.css">
+        <title>BusInfoSys</title>
+    </head>
+    <body>
+        <div class="Container" id="Container-Holder">
+            <div class="NavBar-Holder">
+            <!-- content from navbar.html-->
+            </div>
+            <!-- progress bar -->
+            <div class="ProgressBar-Wrapper">
+                <div class="ProgressBar"></div>
+            </div>
+            <!-- change bus direction -->
+            <div class="Direction-Tabs">
+                <button class="Direction-Tab active"></button>
+                <button class="Direction-Tab"></button>
+            </div>
+            <!-- Display BusStop Section-->
+            <div class="StopContainer" id="Direction-Zero">
+                <!-- BusStopOfRoute.js dynamic render this section -->
+            </div>
+            <div class="StopContainer" id="Direction-One">
+            </div>
+        </div>
+        <!-- Bottom Sheet -->
+        <div id="bottomSheet" class="bottom-sheet">
+            <div class="sheet-content">
+                <div class="stop-title" id="selectedStopTitle">台中刑務所演武場</div>
+                <button onclick="remind()">上車提醒</button>
+                <button onclick="favorite()">我的最愛</button>
+                <button onclick="closeBottomSheet()" class="cancel">取消</button>
+            </div>
+        </div>
+    </body>
+    <script src="./Js/BusStopOfRoute.js"></script>
+    <script src="./JS/BusRealTimeNearStop.js"></script>
+    <script src="./JS/BusEstimatedTime.js"></script>
+</html>

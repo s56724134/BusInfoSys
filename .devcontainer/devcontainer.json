@@ -1,0 +1,96 @@
+// .devcontainer/devcontainer.json
+{
+    "name": "dotnet-dev",
+    "dockerComposeFile": [
+      "../docker-compose.yml"
+    ],
+    "service": "webapi",
+    "workspaceFolder": "/app",
+    "settings": {
+      // color theme
+      "workbench.colorTheme": "One Dark Pro",
+      // intellegent codeing
+      "editor.suggestOnTriggerCharacters": false,
+      "editor.quickSuggestions": {
+        "other": true,
+        "comments": false,
+        "strings": false
+      },
+      "editor.acceptSuggestionOnCommitCharacter": false,
+      "editor.acceptSuggestionOnEnter": "on",
+      "editor.parameterHints.enabled": false,
+      "editor.semanticHighlighting.enabled": true,
+      "editor.semanticTokenColorCustomizations": {    // adjust color
+        "enabled": true,
+        "rules": {
+          "parameter": {
+            "foreground": "#C8D9A8",     // 粉紅色（你可以換掉）
+            "fontStyle": "italic"        // 顯示斜體 ✅
+          },
+          "method": {
+          "foreground": "#4FC1FF",    // 🔵 方法名稱的顏色，接近藍色
+          "fontStyle": "bold"
+          }
+        }
+      },
+
+      // Tab 補全與 TabOut 協調設定
+      "editor.tabCompletion": "on",
+      "tabout.useDefaultTab": false,
+      "tabout.activationOnTab": true,
+      "tabout.activationOnEnter": false,
+
+      // 鍵盤體驗最佳化
+      "editor.minimap.enabled": false,
+      "editor.cursorSmoothCaretAnimation": true,
+      "editor.cursorBlinking": "smooth",
+
+      // 格式化與編碼
+      "files.trimTrailingWhitespace": true,
+      "files.insertFinalNewline": true,
+      "editor.formatOnSave": false,
+
+      // copilot setting
+      "github.copilot.enable": {
+          "*": false
+      },
+      // 🔥 OmniSharp同步最佳化設定
+           // c# test GUI
+      "dotnet.testExplorer.enable": true,
+      // let dotnet server use dotnet8
+      "dotnet.server.useOmnisharp": true,
+      "omnisharp.useModernNet": true,
+      "omnisharp.monitorFileSystem": true,
+      "omnisharp.enableEditorConfigSupport": true,
+      "omnisharp.enableRoslynAnalyzers": true,
+      // ✅ 增加等待時間避免大型專案超時
+      "omnisharp.projectLoadTimeout": 60,
+      // ✅ 避免因為沒有偵測 .csproj 就 IntelliSense 掛掉
+      "omnisharp.enableEditorConfigSupport": true
+    },
+    "extensions": [
+      "albert.TabOut",                    // 跳出括號用
+      "ms-dotnettools.csdevkit",        // C# 開發套件
+      "ms-dotnettools.vscode-dotnet-runtime", // .NET 執行時
+      "esbenp.prettier-vscode",           // 格式化器（可選）
+      "GitHub.copilot",                    // GitHub Copilot
+      "ms-mssql.mssql" ,
+      "patcx.vscode-nuget-gallery",       //Nuget套件
+      "kreativ-software.csharpextensions",
+      "zhuangtongfa.material-theme",
+      "ritwickdey.liveserver"
+    ],
+    "forwardPorts": [5289, 7074, 4040],
+    "portsAttributes": {
+      "5289": {
+        "label": "HTTP (WebAPI)",
+        "onAutoForward": "notify"
+      },
+      "7074": {
+        "label": "HTTPS (WebAPI)",
+        "onAutoForward": "notify"
+      },
+      "remoteUser": "root"
+      // "postCreateCommand": "git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git /workspace && rm -rf /workspace/.git"
+    }
+  }

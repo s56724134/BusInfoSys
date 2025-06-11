@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js"></script>
+    <link rel="stylesheet" href="./css/BusRouteInput.css">
+    <title>BusInfoSys</title>
+  </head>
+  <body>
+    <!-- This is container for all -->
+    <div class="Container" id="Container-Holder">
+      <!-- This is search bar -->
+      <div class="Search-Bar-Wrapper">
+        <form action="/#" method="GET" class="Search-Bar-Form">
+          <div class="Search-Bar-flexbox">
+            <!-- This is search input-->
+            <input type="text" name="route" id="route" placeholder="搜尋" readonly/>
+            <span class="Search-Icon"></span>
+          </div>
+        </form>
+      </div>
+        <!-- This is keyboard structure -->
+      <div class="NumberPad">
+        <button class="num-btn" data-num="1">1</button>
+        <button class="num-btn" data-num="2">2</button>
+        <button class="num-btn" data-num="3">3</button>
+        <button class="num-btn" data-num="4">4</button>
+        <button class="num-btn" data-num="5">5</button>
+        <button class="num-btn" data-num="6">6</button>
+        <button class="num-btn" data-num="7">7</button>
+        <button class="num-btn" data-num="8">8</button>
+        <button class="num-btn" data-num="9">9</button>
+        <button class="keyboard-btn"><span class="keyboard-icon"></span></button>
+        <button class="num-btn" data-num="0">0</button>
+        <button class="del-btn"><span class="del-icon"></span></button>
+      </div>
+    </div>
+    <script src="./js/BusRouteInput.js"></script>
+  </body>
+</html>
