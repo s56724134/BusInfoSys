@@ -30,17 +30,20 @@
             <div class="StopContainer" id="Direction-One">
             </div>
         </div>
+        <!-- Bottom Sheet overlay -->
+        <div id="Overlay" class="Overlay"></div>
         <!-- Bottom Sheet -->
-        <div id="bottomSheet" class="bottom-sheet">
-            <div class="sheet-content">
-                <div class="stop-title" id="selectedStopTitle">台中刑務所演武場</div>
-                <button onclick="remind()">上車提醒</button>
-                <button onclick="favorite()">我的最愛</button>
-                <button onclick="closeBottomSheet()" class="cancel">取消</button>
+        <div id="BottomSheet" class="Bottom-Sheet">
+            <div class="Sheet-Content">
+                <div class="Stop-Title" id="SelectedStopTitle"></div>
+                <button id="RemindBtn">上車提醒</button>
+                <button id=FavoriteBtn>我的最愛</button>
+                <button id="CancelBtn" class="Cancel">取消</button>
             </div>
         </div>
     </body>
     <script src="./Js/BusStopOfRoute.js"></script>
     <script src="./JS/BusRealTimeNearStop.js"></script>
     <script src="./JS/BusEstimatedTime.js"></script>
+    <script src="./JS/BusRemindBottomSheet.js"></script>
 </html>

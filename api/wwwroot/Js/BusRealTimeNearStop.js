@@ -89,7 +89,7 @@ function getEstimatedTimeText(est) {
     if (est.estimateTime > 120) {
         return changeEstimatedTimeToMinute(est) + '分';
     }
-    return "即將進站中"
+    return "即將進站"
 }
 
 let busRouteInputValue = localStorage.getItem('busRouteInputValue');
@@ -127,6 +127,8 @@ function formatNextBusTime(busEstimatedTimeOfArrival) {
 
     return time;
 }
+
+
 function createBusContainerClass(bus, stopItem)
 {
     let busContainer = document.createElement('div');

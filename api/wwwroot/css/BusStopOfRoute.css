@@ -2,6 +2,11 @@ body {
     overflow-x: hidden;
 }
 
+body.No-Scroll{
+    overflow: hidden;
+    touch-action: none;
+}
+
 .NavBar-Holder,
 .Direction-Tabs {
     box-sizing: border-box;
@@ -87,13 +92,6 @@ body {
     color: #333;
 }
 
-/* .TimeBox.coming {
-    background-color: #1b2b52;
-    color: white;
-    border-radius: 5px;
-    padding: 5px;
-} */
-
 .Stop-Sequence {
     width: 24px;
     height: 24px;
@@ -118,5 +116,57 @@ body {
 .StopName {
     font-size: 1rem;
     font-weight: 500;
+}
+
+/* ===============Bottom Sheet================ */
+.Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5); /* 半透明黑色 */
+    z-index: 1999; /* 比 bottomSheet 低一層 */
+    display: none; /* 初始不顯示 */
+}
+
+.Overlay.Show {
+    display: block;
+}
+
+.Bottom-Sheet {
+    position: fixed;
+    bottom: -300px; /* 初始藏在下方 */
+    left: 0;
+    width: 100%;
+    background: white;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+    transition: bottom 0.3s ease;
+    z-index: 2000;
+    font-family: sans-serif;
+}
+
+.Bottom-Sheet.Show {
+    bottom: 0; /* 顯示時往上冒出來 */
+}
+
+.Sheet-Content {
+    padding: 20px;
+    text-align: center;
+}
+
+.Sheet-Content button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: none;
+    font-size: 16px;
+    border-top: 1px solid #ddd;
+}
+
+.Cancel {
+  color: red;
+  font-weight: bold;
 }
 
