@@ -5,6 +5,9 @@ document.addEventListener('StopItemRendered', function(){
     document.getElementById('Direction-One').addEventListener('click', (e) => openDirectionOneBottomSheet(e));
     // Close BottomSheet
     document.getElementById('CancelBtn').addEventListener('click', () => closeBottomSheet());
+    document.getElementById('Overlay').addEventListener('click', () => closeBottomSheet());
+    // Open RemindPage
+    document.getElementById('RemindBtn').addEventListener('click', () => openRemindPage());
 });
 
 function openDirectionZeroBottomSheet(e) {
@@ -23,7 +26,6 @@ function openDirectionZeroBottomSheet(e) {
         document.getElementById('Overlay').classList.add('Show');
         // Forbidden screen move
         document.body.classList.add('No-Scroll');
-
     }
 }
 
@@ -53,3 +55,7 @@ function closeBottomSheet() {
     document.body.classList.remove('No-Scroll');
 }
 
+function openRemindPage() {
+    console.log('that be active');
+    window.location.href = '/BusRemind.html';
+}

@@ -55,18 +55,6 @@ app.MapPost("/linebot/webhook", async (HttpRequest request) =>
 });
 
 
-// app.MapGet("/api/businfoliff", async(HttpRequest request) =>
-// {
-//     using var reader = new StreamReader(request.Body);
-//     var body = await reader.ReadToEndAsync();
-//     Console.WriteLine("公車頁面 收到liff" + body);
-//      // 回傳一個 HTML 頁面
-//     string htmlContent = "<html><body><h2>這是公車LIFF頁面</h2></body></html>";
-//     return Results.Content(htmlContent, "text/html; charset=utf-8");
-// });
-// test============================================================
-
-
 // this can map what controller you have
 app.MapControllers();
 

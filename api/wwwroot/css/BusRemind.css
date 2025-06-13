@@ -1,0 +1,320 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    padding: 20px 0;
+}
+/* ==================== Container ==================== */
+.Container {
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+/* ==================== Header ==================== */
+.Header {
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #14274E 0%, #2d3748 100%);
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    letter-spacing: 1px;
+}
+
+/* ==================== Section ==================== */
+.Section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border-left: 4px solid #14274E;
+}
+
+.Section>label {
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+/* ==================== CheckBox-Group ==================== */
+.Checkbox-Group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.Checkbox-Group label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 2px solid #e9ecef;
+    font-weight: 400;
+}
+
+.Checkbox-Group label:hover {
+    border-color: #14274E;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.Checkbox-Group input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #14274E;
+}
+
+.Checkbox-Group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #14274E;
+}
+
+.custom-time-input {
+    display: inline-block;
+    min-width: 40px;
+    padding: 2px 6px;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 4px;
+    text-align: center;
+    font-size: 16px;
+    color: inherit;
+    cursor: text;
+}
+
+.custom-time-label.selected .custom-time-input {
+    background: rgba(255,255,255,0.9);
+    color: #007AFF;
+    border-color: rgba(255,255,255,0.5);
+}
+
+.Week-Select {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+.Week-Select label {
+    text-align: center;
+    background: white;
+    padding: 12px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    border: 2px solid #e9ecef;
+    transition: all 0.2s ease;
+    font-size: 14px;
+}
+
+.Week-Select label:hover {
+    border-color: #14274E;
+    background: #14274E;
+    color: white;
+    transform: translateY(-1px);
+}
+
+.Week-Select input[type="checkbox"] {
+    display: none;
+}
+
+.Week-Select input[type="checkbox"]:checked+span {
+    background: #14274E;
+    color: white;
+}
+
+.Time-Range {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: white;
+    border-radius: 8px;
+    border: 2px solid #e9ecef;
+}
+
+.Time-Range input[type="time"] {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color 0.2s ease;
+}
+
+.Time-Range input[type="time"]:focus {
+    outline: none;
+    border-color: #14274E;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.Time-Range span {
+    font-weight: 600;
+    color: #14274E;
+    font-size: 18px;
+}
+
+.Confirm-Btn {
+    margin-top: 20px;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #14274E 0%, #2d3748 100%);
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    letter-spacing: 0.5px;
+}
+
+.Confirm-Btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.Confirm-Btn:active {
+    transform: translateY(0);
+}
+
+/* 響應式設計 */
+@media (max-width: 480px) {
+    /* .container {
+        margin: 0 15px;
+        padding: 20px;
+    } */
+
+    .Week-Select {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+    }
+
+    .Week-Select label {
+        padding: 10px 6px;
+        font-size: 13px;
+    }
+}
+
+/* iPhone 風格數字鍵盤 */
+.numeric-keyboard {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #d1d5db;
+    border-top: 1px solid #9ca3af;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.numeric-keyboard.show {
+    transform: translateY(0);
+}
+
+.keyboard-header {
+    background: #f3f4f6;
+    padding: 8px 16px;
+    border-bottom: 1px solid #9ca3af;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.keyboard-done {
+    color: #007AFF;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.keyboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: #9ca3af;
+    padding: 1px;
+}
+
+.keyboard-key {
+    background: white;
+    border: none;
+    padding: 16px;
+    font-size: 24px;
+    font-weight: 400;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60px;
+    transition: background-color 0.1s;
+}
+
+.keyboard-key:active {
+    background: #e5e7eb;
+}
+
+.keyboard-key.delete {
+    background: #6b7280;
+    color: white;
+    font-size: 18px;
+}
+
+.keyboard-key.delete:active {
+    background: #4b5563;
+}
+
+.keyboard-key.disabled {
+    color: #9ca3af;
+    cursor: not-allowed;
+}
+
+.keyboard-key.disabled:active {
+    background: white;
+}
+
+/* 遮罩層 */
+.keyboard-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+.keyboard-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* .cursor {
+    display: inline-block;
+    width: 2px;
+    height: 20px;
+    background: #007AFF;
+    animation: blink 1s infinite;
+    margin-left: 2px;
+} */
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}

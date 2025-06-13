@@ -30,8 +30,9 @@ document.addEventListener('DOMContentLoaded', function () {
         input.focus();
     });
 	// click Search-Icon trigger the event that put data to api
-	document.querySelector('.Search-Icon').addEventListener('click', loadData);
-
+	document.querySelector('.Search-Icon').addEventListener('click', async function() {
+		await loadData();
+	});
 });
 
 async function loadData (){
@@ -43,7 +44,6 @@ async function loadData (){
 		return;
 	}
 	// save value to localStorage
-
 	let busRouteUrl = `/api/businfo/BusRoute/${encodeURIComponent(value)}`;
 	let busStopOfRouteUrl = `/api/businfo/BusStopOfRoute/${encodeURIComponent(value)}`;
 	let busRealTimeNearStopUrl = `/api/businfo/RealTimeNearStop/${encodeURIComponent(value)}`;
