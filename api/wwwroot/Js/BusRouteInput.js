@@ -1,14 +1,33 @@
 // This init the liff
-document.addEventListener('DOMContentLoaded', function () {
-	liff.init({
-		liffId: '2007424668-B8rkZdQN' // 請替換成你的 LIFF ID
-	}).then(() => {
-		// 初始化成功
-		console.log('LIFF 初始化成功');
-	}).catch((err) => {
-		// 初始化失敗
-		console.error('LIFF 初始化失敗:', err);
-	});
+// document.addEventListener('DOMContentLoaded', function () {
+// 	liff.init({
+// 		liffId: '2007424668-B8rkZdQN' // 請替換成你的 LIFF ID
+// 	}).then(() => {
+// 		// 初始化成功
+// 		console.log('LIFF 初始化成功');
+// 	}).catch((err) => {
+// 		// 初始化失敗
+// 		console.error('LIFF 初始化失敗:', err);
+// 	});
+// });
+
+document.addEventListener('DOMContentLoaded', async function () {
+	try
+	{
+		await liff.init({ liffId: '2007424668-B8rkZdQN' });
+		if (!liff.isLoggedIn()) {
+			liff.login({
+				redirectUri: window.Location.href
+			});
+		} else {
+			const idToken = liff.getIDToken();
+			console.log('取得的 ID Token:', idToken);
+		}
+	}
+	catch (error)
+	{
+		console.error('LIFF 初始化錯誤:', error);
+	}
 });
 
 
@@ -36,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 async function loadData (){
-    // get input value
+    // Get input value
 	let input = document.getElementById('route');
 	let value = input.value.trim();
 	if (!value) {
