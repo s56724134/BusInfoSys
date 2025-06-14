@@ -16,16 +16,19 @@ function openDirectionZeroBottomSheet(e) {
     if(stopItem)
     {
         // Get the element with class 'StopName' inside the stopItem
-        let stopName = stopItem.querySelector('.StopName');
+        let stopNameClass = stopItem.querySelector('.StopName');
+        let stopName = stopNameClass.textContent;
         // Find the element with id 'SelectedStopTitle'
         let selectStopTitle = document.querySelector('#SelectedStopTitle');
         // Set the text content of selectStopTitle to the stop name
-        selectStopTitle.textContent = stopName.textContent;
+        selectStopTitle.textContent = stopName;
         // Show the bottom sheet by adding the 'Show' class
         document.getElementById('BottomSheet').classList.add('Show');
         document.getElementById('Overlay').classList.add('Show');
         // Forbidden screen move
         document.body.classList.add('No-Scroll');
+        // Set stop name at sessionStorage
+        sessionStorage.setItem('stopName', stopName);
     }
 }
 
@@ -37,15 +40,18 @@ function openDirectionOneBottomSheet(e) {
     if(stopItem)
     {
         // Get the element with class 'StopName' inside the stopItem
-        let stopName = stopItem.querySelector('.StopName');
+        let stopNameClass = stopItem.querySelector('.StopName');
+        let stopName = stopNameClass.textContent;
         // Find the element with id 'SelectedStopTitle'
         let selectStopTitle = document.querySelector('#SelectedStopTitle');
         // Set the text content of selectStopTitle to the stop name
-        selectStopTitle.textContent = stopName.textContent;
+        selectStopTitle.textContent = stopName;
         // Show the bottom sheet by adding the 'Show' class
         document.getElementById('BottomSheet').classList.add('Show');
         document.getElementById('Overlay').classList.add('Show');
         document.body.classList.add('No-Scroll');
+        // Set stop name at sessionStorage
+        sessionStorage.setItem('stopName', stopName);
     }
 }
 

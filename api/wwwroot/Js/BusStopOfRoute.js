@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', async function(){
     startProgressBar();
     getRouteInfo();
     getBusStopOfRoute();
+    // First Render FromDeparture Direction
     displayStopFromDeparture();
     changeDirectionTabs();
 });

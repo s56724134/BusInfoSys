@@ -1,3 +1,12 @@
+// =========================== ===========================
+document.addEventListener('DOMContentLoaded', () => setHeaderName());
+
+function setHeaderName() {
+    let header = document.querySelector('.Header');
+    let stopName = sessionStorage.getItem('stopName');
+    header.textContent = stopName;
+}
+
 // =========================== KeyBoard Behavior Event =========================== //
 let currentValue = '';
 let isKeyboardShown = false;
