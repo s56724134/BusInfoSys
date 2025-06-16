@@ -103,6 +103,7 @@ function displayStopFromDeparture() {
     let stopContainerWithOne = document.getElementById('Direction-One');
     let direction = 0;
     let busStopRouteJson = getBusStopOfRoute(direction);
+    console.log(busStopRouteJson);
     // check the getIsDirectionZero value
     stopContainerWithZero.style.display = 'block';
     stopContainerWithOne.style.display = 'none';
@@ -112,7 +113,7 @@ function displayStopFromDeparture() {
     for(let i=0; i<busStopRouteJson.stops.length; i++)
     {
         stopContainerWithZero.innerHTML +=
-            `<div class="StopItem" id="StopSequence-${busStopRouteJson.stops[i].stopSequence}">
+            `<div class="StopItem" id="StopSequence-${busStopRouteJson.stops[i].stopSequence}" data-stopid="${busStopRouteJson.stops[i].stopID}">
                 <div class="TimeBox"></div>
                 <div class="Stop-Sequence">${busStopRouteJson.stops[i].stopSequence}</div>
                 <div class="StopContent">
@@ -137,7 +138,7 @@ function displayStopFromDestination()
     for(let i=0; i<busStopRouteJson.stops.length; i++)
     {
         stopContainerWithOne.innerHTML +=
-            `<div class="StopItem" id="StopSequence-${busStopRouteJson.stops[i].stopSequence}">
+            `<div class="StopItem" id="StopSequence-${busStopRouteJson.stops[i].stopSequence} data-stopid="${busStopRouteJson.stops[i].stopID}">
                 <div class="TimeBox">
                 </div>
                 <div class="Stop-Sequence">${busStopRouteJson.stops[i].stopSequence}</div>
