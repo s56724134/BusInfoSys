@@ -1,3 +1,4 @@
+# =========================Service setting=========================
 services:
   #  web api service
   webapi:
@@ -13,6 +14,7 @@ services:
     ports:
       - "5289:5289"
       - "7074:7074"
+    # Let container's status is sleep that devcontainer
     command: sleep infinity
 
   # sqslserver service
@@ -39,7 +41,6 @@ services:
       - NGROK_AUTHTOKEN=2x4JS0YDI8Cdu8vewI5nQzKnOV3_7ir9igEbpKuLqNBprdJmB
     ports:
       - "4040:4040"
-
 volumes:
   sqlserver_data_BusInfoSys:
 
