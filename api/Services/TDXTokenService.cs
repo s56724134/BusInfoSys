@@ -13,7 +13,7 @@ namespace api.Services
     {
         private readonly IConfiguration _config;
         private readonly HttpClient _httpClient;
-        private string TokenEndPoint = $"https://tdx.transportdata.tw/auth/realms/TDXConnect/protocol/openid-connect/token";
+        private string _tokenEndPoint = $"https://tdx.transportdata.tw/auth/realms/TDXConnect/protocol/openid-connect/token";
         // Dependent Injection on IConfiguration
         private static TDXAccessToken _cachedToken;
         private static DateTime _tokenExpiry;
@@ -44,7 +44,7 @@ namespace api.Services
                 // FormUrlEncodedContent can convert parameters to "application/x-www-form-urlencoded"
                 var formData = new FormUrlEncodedContent(parameters);
                 // That PostAsync's para type is HttpContent and FormUrlEncodedContent inherit HttpContent
-                var response = await _httpClient.PostAsync(TokenEndPoint, formData);
+                var response = await _httpClient.PostAsync(_tokenEndPoint, formData);
                 // Console.WriteLine("TDXToken Response:" + response);
                 response.EnsureSuccessStatusCode();
 

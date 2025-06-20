@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => setHeaderName());
 
 function setHeaderName() {
     let header = document.querySelector('.Header');
-    let stopName = sessionStorage.getItem('stopName');
+    let stopName = sessionStorage.getItem('busRemindstopName');
     header.textContent = stopName;
 }
 

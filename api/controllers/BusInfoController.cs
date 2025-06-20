@@ -7,19 +7,20 @@ using Microsoft.AspNetCore.Mvc;
 using api.Interfaces;
 using api.Mapper;
 using api.Models.TDXApi;
+using api.Dtos;
 
 
 namespace api.controllers
 {
     [Route("api/businfo")]
     [ApiController]
-    public class LineLiffController : ControllerBase
+    public class BusInfoController : ControllerBase
     {
         // Dependent Injection
-        private readonly ILineLiffBusService _lineLiffBusService;
-        public LineLiffController(ILineLiffBusService lineLiffBusService)
+        private readonly IBusInfoService _busInfoService;
+        public BusInfoController(IBusInfoService busInfoService)
         {
-            _lineLiffBusService = lineLiffBusService;
+            _busInfoService = busInfoService;
         }
 
         [HttpGet("BusRoute/{RouteName}")]
@@ -27,7 +28,7 @@ namespace api.controllers
         {
             Console.WriteLine("=== Controller GetBusRoute called ===");
             // Get the busRoute data
-            BusRoute[] busRouteModel = await _lineLiffBusService.GetBusRoute(RouteName);
+            BusRoute[] busRouteModel = await _busInfoService.GetBusRoute(RouteName);
             if (busRouteModel != null)
             {
                 var busRouteDto = busRouteModel.Select(s => s.ToBusRouteDto());
@@ -43,7 +44,7 @@ namespace api.controllers
         public async Task<IActionResult> GetBusStopOfRoute([FromRoute] string RouteName)
         {
             Console.WriteLine("================GetBusStopOfRoute start================");
-            var busStopOfRouteModel = await _lineLiffBusService.GetBusStopOfRoute(RouteName);
+            var busStopOfRouteModel = await _busInfoService.GetBusStopOfRoute(RouteName);
             if (busStopOfRouteModel != null)
             {
                 var busStopOfRouteDto = busStopOfRouteModel.Select(s => s.ToDisplayBusStopOfRouteDto());
@@ -58,7 +59,7 @@ namespace api.controllers
         [HttpGet("DailyStopTimeTable/{RouteName}")]
         public async Task<IActionResult> GetDailyStopTimeTable([FromRoute] string RouteName)
         {
-            var dailyStopTimeTable = await _lineLiffBusService.GetDailyStopTimeTable(RouteName);
+            var dailyStopTimeTable = await _busInfoService.GetDailyStopTimeTable(RouteName);
             if (dailyStopTimeTable != null)
             {
                 var dailyStopTimeTableDto = dailyStopTimeTable.Select(d => d.ToDailyStopTimeTableDto());
@@ -74,7 +75,7 @@ namespace api.controllers
         [HttpGet("RealTimeNearStop/{RouteName}")]
         public async Task<IActionResult> GetRealTimeNearStop([FromRoute] string RouteName)
         {
-            var realTimeNearStop = await _lineLiffBusService.GetRealTimeNearStop(RouteName);
+            var realTimeNearStop = await _busInfoService.GetRealTimeNearStop(RouteName);
             if (realTimeNearStop != null)
             {
                 var realTimeNearStopDto = realTimeNearStop
@@ -93,7 +94,7 @@ namespace api.controllers
         [HttpGet("EstimatedTimeOfArrival/{RouteName}")]
         public async Task<IActionResult> GetEstimatedTimeOfArrival([FromRoute] string RouteName)
         {
-            var estimatedTimeOfArrival = await _lineLiffBusService.GetEstimatedTimeOfArrival(RouteName);
+            var estimatedTimeOfArrival = await _busInfoService.GetEstimatedTimeOfArrival(RouteName);
             if (estimatedTimeOfArrival != null)
             {
                 var estimatedTimeOfArrivalDto = estimatedTimeOfArrival

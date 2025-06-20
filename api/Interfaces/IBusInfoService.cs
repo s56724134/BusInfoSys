@@ -6,7 +6,7 @@ using api.Models.TDXApi;
 
 namespace api.Interfaces
 {
-    public interface ILineLiffBusService
+    public interface IBusInfoService
     {
         Task<BusRoute[]> GetBusRoute(string routeName);
 

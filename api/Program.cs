@@ -3,6 +3,7 @@ using api.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using api.Data;
+using api.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,13 +14,15 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers();
 
+// Dependency Injection
 builder.Services.AddScoped<ITDXTokenService, TDXTokenService>();
-builder.Services.AddHttpClient<ILineLiffBusService, LineLiffBusService>();
+builder.Services.AddHttpClient<IBusInfoService, BusInfoService>();
+builder.Services.AddHttpClient<ILineIDTokenService, LineIDTokenService>();
+// builder.Services.AddScoped<IRemindRepository, RemindRepository>();
 
-
-builder.Services.AddDbContext<AppDbContext>(options =>
+// Register DBContext that reference "appsetting.Development.json"
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
 
 var app = builder.Build();
 

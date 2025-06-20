@@ -14,20 +14,20 @@
             <!-- Header Section -->
             <div class="Header">台中刑務所演武場</div>
             <!-- Time Section -->
-            <div class="Section">
+            <div class="Section" data-id="setCountTime">
                 <label>時間提醒</label>
                 <!-- Time Section Group -->
                 <div class="Checkbox-Group">
                     <label>
-                        <input type="radio" name="remind-time" checked>
+                        <input type="radio" name="remind-time" value="5" checked>
                         <span>5分鐘前提醒</span>
                     </label>
                     <label>
-                        <input type="radio" name="remind-time">
+                        <input type="radio" name="remind-time" value="10">
                         <span>10分鐘前提醒</span>
                     </label>
                     <label>
-                        <input type="radio" name="remind-time">
+                        <input type="radio" name="remind-time" value="15">
                         <span>15分鐘前提醒</span>
                     </label>
                     <label class="custom-time-label">
@@ -37,41 +37,41 @@
                 </div>
             </div>
             <!-- Repeat Time Week Section -->
-            <div class="Section">
+            <div class="Section" data-id="setRepeatWeekTime">
                 <label>重複提醒</label>
                 <div class="Week-Select">
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" value="Mon">
                         <span>一</span>
                     </label>
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" value="Tue">
                         <span>二</span>
                     </label>
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" value="Wed">
                         <span>三</span>
                     </label>
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" value="Thu">
                         <span>四</span>
                     </label>
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" value="Fri">
                         <span>五</span>
                     </label>
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" value="Sat">
                         <span>六</span>
                     </label>
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" value="Sun">
                         <span>日</span>
                     </label>
                 </div>
             </div>
-            <!-- Set Time Section -->
-            <div class="Section">
+            <!-- Set Bus Show Up Time Section -->
+            <div class="Section" data-id="setBusShowUpTime">
                 <label>時間設定</label>
                 <div class="Time-Range">
                     <input type="time" value="09:00">
@@ -81,32 +81,33 @@
             </div>
             <!-- Confirm Bottom -->
             <button class="Confirm-Btn">確定</button>
-
-             <!-- 鍵盤遮罩 -->
-    <div class="keyboard-overlay"></div>
-
-    <!-- iPhone 風格數字鍵盤 -->
-    <div class="numeric-keyboard">
-        <div class="keyboard-header">
-            <span></span>
-            <span class="keyboard-done">完成</span>
         </div>
-        <div class="keyboard-grid">
-            <button class="keyboard-key" data-number="1">1</button>
-            <button class="keyboard-key" data-number="2">2</button>
-            <button class="keyboard-key" data-number="3">3</button>
-            <button class="keyboard-key" data-number="4">4</button>
-            <button class="keyboard-key" data-number="5">5</button>
-            <button class="keyboard-key" data-number="6">6</button>
-            <button class="keyboard-key" data-number="7">7</button>
-            <button class="keyboard-key" data-number="8">8</button>
-            <button class="keyboard-key" data-number="9">9</button>
-            <button class="keyboard-key disabled">.</button>
-            <button class="keyboard-key" data-number="0">0</button>
-            <button class="keyboard-key delete" data-action="delete">⌫</button>
+        <!-- 鍵盤遮罩 -->
+        <div class="keyboard-overlay"></div>
+
+        <!-- iPhone 風格數字鍵盤 -->
+        <div class="numeric-keyboard">
+            <div class="keyboard-header">
+                <span></span>
+                <span class="keyboard-done">完成</span>
+            </div>
+            <div class="keyboard-grid">
+                <button class="keyboard-key" data-number="1">1</button>
+                <button class="keyboard-key" data-number="2">2</button>
+                <button class="keyboard-key" data-number="3">3</button>
+                <button class="keyboard-key" data-number="4">4</button>
+                <button class="keyboard-key" data-number="5">5</button>
+                <button class="keyboard-key" data-number="6">6</button>
+                <button class="keyboard-key" data-number="7">7</button>
+                <button class="keyboard-key" data-number="8">8</button>
+                <button class="keyboard-key" data-number="9">9</button>
+                <button class="keyboard-key disabled">.</button>
+                <button class="keyboard-key" data-number="0">0</button>
+                <button class="keyboard-key delete" data-action="delete">⌫</button>
+            </div>
         </div>
-    </div>
     </body>
     <script src="./Js/BusRemindUIControl.js"></script>
     <script src="./JS/BusRemindDataControl.js"></script>
+    <script src="./JS/BusRemindSendData.js"></script>
 </html>

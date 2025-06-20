@@ -12,15 +12,14 @@ using api.Mapper;
 
 namespace api.Services
 {
-    public class LineLiffBusService : ILineLiffBusService
+    public class BusInfoService : IBusInfoService
     {
         private readonly HttpClient _httpClient;
         private readonly ITDXTokenService _tokenService;
-        public LineLiffBusService(HttpClient httpClient, ITDXTokenService tokenService)
+        public BusInfoService(HttpClient httpClient, ITDXTokenService tokenService)
         {
             _httpClient = httpClient;
             _tokenService = tokenService;
-
         }
 
         // That Frontend could fetch api get busroute data that para is string

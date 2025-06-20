@@ -10,11 +10,13 @@ document.addEventListener('StopItemRendered', function(){
     document.getElementById('RemindBtn').addEventListener('click', () => openRemindPage());
 });
 
+// Set StopName and StopId
 function openDirectionZeroBottomSheet(e) {
     // Find the closest parent element with class 'StopItem'
     const stopItem = e.target.closest('.StopItem');
     if(stopItem)
     {
+
         // Get the element with class 'StopName' inside the stopItem
         let stopNameClass = stopItem.querySelector('.StopName');
         let stopName = stopNameClass.textContent;
@@ -28,10 +30,10 @@ function openDirectionZeroBottomSheet(e) {
         // Forbidden screen move
         document.body.classList.add('No-Scroll');
         // Set stop name at sessionStorage
-        sessionStorage.setItem('stopName', stopName);
+        setStopNameToSessionStorage(stopName);
+        setStopIdToSessionStorage(stopItem);
     }
 }
-
 
 
 function openDirectionOneBottomSheet(e) {
@@ -39,6 +41,7 @@ function openDirectionOneBottomSheet(e) {
     const stopItem = e.target.closest('.StopItem');
     if(stopItem)
     {
+
         // Get the element with class 'StopName' inside the stopItem
         let stopNameClass = stopItem.querySelector('.StopName');
         let stopName = stopNameClass.textContent;
@@ -51,9 +54,25 @@ function openDirectionOneBottomSheet(e) {
         document.getElementById('Overlay').classList.add('Show');
         document.body.classList.add('No-Scroll');
         // Set stop name at sessionStorage
-        sessionStorage.setItem('stopName', stopName);
+        setStopNameToSessionStorage(stopName);
+        setStopIdToSessionStorage(stopItem);
     }
 }
+
+
+//Set StopId to session storage
+function setStopIdToSessionStorage(stopItem) {
+    //
+    let stopId = stopItem.getAttribute('data-stopid');
+    sessionStorage.setItem('busRemindStopItem', stopId);
+}
+
+//Set StopName to session storage
+function setStopNameToSessionStorage(stopName) {
+    sessionStorage.setItem('busRemindstopName', stopName);
+}
+
+
 
 function closeBottomSheet() {
     document.getElementById('BottomSheet').classList.remove('Show');
@@ -65,3 +84,5 @@ function openRemindPage() {
     console.log('that be active');
     window.location.href = '/BusRemind.html';
 }
+
+
