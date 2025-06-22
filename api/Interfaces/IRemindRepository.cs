@@ -9,6 +9,6 @@ namespace api.Interfaces
 {
     public interface IRemindRepository
     {
-        Task<Remind> CreateAsync(CreateRemindRequestDto createDto);
+        Task<Remind> CreateAsync(CreateRemindRequestDto createDto, AccessLineUserInfo userInfo);
     }
 }

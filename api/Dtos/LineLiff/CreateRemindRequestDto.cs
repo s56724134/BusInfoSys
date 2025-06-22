@@ -9,7 +9,9 @@ namespace api.Dtos.LineLiff
     public class CreateRemindRequestDto
     {
         [Required]
-        public string UserID { get; set; } = string.Empty;
+        public string UserIDToken { get; set; } = string.Empty;
+        [Required]
+        public string UserClientId { get; set; } = string.Empty;
         [Required]
         public string UserRouteName { get; set; } = string.Empty;
         [Required]

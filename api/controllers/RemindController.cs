@@ -7,34 +7,47 @@ using api.Dtos.LineLiff;
 using api.Interfaces;
 
 
-// namespace api.controllers
-// {
-//     [ApiController]
-//     [Route("api/Remind")]
-//     public class RemindController : ControllerBase
-//     {
-//         private readonly IRemindRepository _remindRepo;
-//         public RemindController(IRemindRepository remindRepository)
-//         {
-//             _remindRepo = remindRepository;
-//         }
+namespace api.controllers
+{
+    [ApiController]
+    [Route("api/Remind")]
+    public class RemindController : ControllerBase
+    {
+        private readonly IRemindRepository _remindRepo;
+        private readonly ILineIDTokenService _idTokenService;
+        public RemindController(IRemindRepository remindRepository, ILineIDTokenService idTokenService)
+        {
+            _remindRepo = remindRepository;
+            _idTokenService = idTokenService;
+        }
 
-//         [HttpPost]
-//         public async Task<IActionResult> Create([FromBody] CreateRemindRequestDto createDto)
-//         {
-//             Console.WriteLine("===================active==================");
-//             if (!ModelState.IsValid)
-//             {
-//                 return BadRequest(ModelState);
-//             }
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateRemindRequestDto createDto)
+        {
+            Console.WriteLine("===================active==================");
 
-//             var remindModel = _remindRepo.CreateAsync(createDto);
-//             //User's remind can not repeat
-//             // await _remindRepo.Create();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-//             // 先測試因此先放資料
-//             return Ok(remindModel);
-//         }
+            // Verify UserIDToken
+            var lineIDTokenDto = new LineIDTokenDto()
+            {
+                IdToken = createDto.UserIDToken,
+                ClientId = createDto.UserClientId
+            };
 
-//     }
-// }
+
+
+            // Return data is "AccessLineUserInfo" Model
+            var userInfo = await _idTokenService.VerifyIDToken(lineIDTokenDto);
+            // pass userInfo and remindRequest
+            // Console.WriteLine(userInfo.Sub);
+            var remindModel = await _remindRepo.CreateAsync(createDto, userInfo);
+
+            return Ok(remindModel);
+        }
+
+    }
+}
