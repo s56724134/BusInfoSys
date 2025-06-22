@@ -8,12 +8,12 @@ namespace api.Models.LineModel
     public class Remind
     {
         public int Id { get; set; }
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
         public int StopId { get; set; }
         // JSON 欄位：建議存在 JSON 字串或轉成複合型別
         public RemindTimeValue? RemindTime { get; set; }
-        public DateTime CreateTime { get; set; }
-        public DateTime ModifyTime { get; set; }
+        public DateTime CreateTime { get; set; } = DateTime.UtcNow;
+        public DateTime ModifyTime { get; set; } = DateTime.UtcNow;
         public User User { get; set; }
         public Stop Stop { get; set; }
     }

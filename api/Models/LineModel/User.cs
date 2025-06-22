@@ -7,9 +7,9 @@ namespace api.Models.LineModel
 {
     public class User
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public string? Profile { get; set; }
-        public DateTime CreateTime { get; set; }
+        public DateTime CreateTime { get; set; } = DateTime.UtcNow;
         public DateTime LoginTime { get; set; }
         public DateTime LastTime { get; set; }
         // 導覽屬性
