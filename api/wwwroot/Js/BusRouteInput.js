@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 		// 登入成功，取得 id_token
 		const idToken = liff.getIDToken();
+		console.log(idToken);
 
 		// 傳到後端做驗證
 		let response = await fetch('/api/lineuserverify', {

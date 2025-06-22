@@ -1,105 +1,140 @@
-// Waits for a specific event to occur on a given target and resolves a Promise when the event is triggered.
-// Usage: await waitForEvent('click', someElement);
-document.addEventListener('DOMContentLoaded', function (){
-    //
-    document.querySelector('.Confirm-Btn').addEventListener('click', sendRemindDataToServer);
-})
+// document.addEventListener('DOMContentLoaded', () =>
+//     document.querySelector('[data-action="submit"]').addEventListener('click', async () => await sendRemindData())
+// )
 
-function sendRemindDataToServer() {
-    let userIDToken = getUserIDToken();
-    let userRouteName = getUserRouteName();
-    let userStopName = getUserStopName();
-    let userStopId = getUserStopId();
-    let userSelectedRemindTime = getSelectedRemindTime();
-    let userRepeatWeekTime = getRepeatWeekTime();
-    let [showUpStart, showUpEnd] = getBusShowUpTime();
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        await liff.init({ liffId: '2007424668-B8rkZdQN' });
 
-    //Create Json Object
-    const data = {
-        userIDToken,
-        userRouteName,
-        userStopName,
-        userStopId,
-        userSelectedRemindTime,
-        userRepeatWeekTime,
-        userBusShowUpTime: {
-            start: showUpStart,
-            end: showUpEnd
+        if (!liff.isLoggedIn()) {
+            liff.login({ redirectUri: window.location.href });
+            return;
+        }
+
+        console.log("LIFF 初始化成功");
+
+        const idToken = liff.getIDToken();
+        console.log("取得 idToken:", idToken);
+
+        //驗證 Token 是否有效
+        const verifyResponse = await fetch('/api/lineuserverify', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                idToken: idToken,
+                clientId: '2007424668'
+            })
+        });
+
+        if (verifyResponse.status === 400 || verifyResponse.status === 401) {
+            console.warn("Token 無效或過期，重新登入中...");
+            liff.logout();
+            liff.login({ redirectUri: window.location.href });
+            return;
+        }
+
+        console.log("Token 驗證成功");
+
+        //驗證完才綁定點擊事件
+        document.querySelector('[data-action="submit"]').addEventListener('click', async () => {
+            await sendRemindData();
+        });
+
+    } catch (err) {
+        console.error("LIFF 初始化或驗證錯誤:", err);
+        alert("LIFF 初始化失敗，請重新打開頁面");
+    }
+});
+
+async function sendRemindData() {
+
+    let data = {
+        userIDToken:getUserIDToken(),
+        userClientId:getAppClientId(),
+        userRouteName:getRouteName(),
+        userSelectedRemindTime:getMinuteTimeRemind(),
+        userStopName:getStopName(),
+        userRepeatWeekTime:getRepeatWeekTime(),
+        userBusShowUpTime:getBusShowUpTime()
+    }
+
+    try {
+        const response = await fetch('/api/Remind', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            console.log('提醒設定成功', result);
+            alert('提醒已成功加入！');
+            // 可導向其他頁面或重整
+        } else {
+            const errorText = await response.text();
+            console.error('提醒設定失敗', errorText);
+            alert('提醒設定失敗，請稍後再試');
+        }
+    } catch (error) {
+        console.error('網路或伺服器錯誤', error);
+        alert('發生錯誤，請檢查網路或稍後再試');
+    }
+}
+
+function getUserIDToken () {
+    // let userIDToken = localStorage.getItem('LIFF_STORE:2007424668-B8rkZdQN:IDToken');
+    // return userIDToken;
+    return liff.getIDToken();
+}
+
+function getAppClientId () {
+    return '2007424668';
+}
+
+function getRouteName () {
+    let routeName = localStorage.getItem('busRouteInputValue');
+    return routeName;
+}
+
+function getMinuteTimeRemind () {
+    let selectedInput = document.querySelector('[data-id="setCountTime"] input[name="remind-time"]:checked');
+    let remindMinutes = selectedInput?.value;
+
+    if (remindMinutes === 'custom') {
+        const customValue = document.querySelector('.custom-time-input')?.dataset.value;
+        if (customValue) {
+            remindMinutes = customValue;
+        } else {
+            remindMinutes = '';
         }
     }
-    console.log(data);
-    // const jsonData = JSON.stringify(data);
-    // // 用 fetch 傳送到後端
-    // fetch('/api/bus-remind', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: jsonData
-    // })
-    // .then(response => response.json())
-    // .then(result => {
-    //     console.log('後端回應：', result);
-    //     })
-    // .catch(error => {
-    //     console.error('傳送失敗：', error);
-    //     });
+
+    return remindMinutes;
 }
 
-function getUserIDToken() {
-    return localStorage.getItem('LIFF_STORE:2007424668-B8rkZdQN:IDToken');
+function getStopName () {
+    let stopName = sessionStorage.getItem('busRemindstopName');
+    return stopName;
 }
 
-function getUserRouteName() {
-    return localStorage.getItem('busRouteInputValue');
+function getRepeatWeekTime () {
+    const checkedWeekdays = Array.from(
+        document.querySelectorAll('[data-id="setRepeatWeekTime"] input[type="checkbox"]:checked')
+        ).map(checkbox => checkbox.value);
+
+    return checkedWeekdays;
 }
 
-function getUserStopName() {
-    return sessionStorage.getItem('busRemindstopName');
+function getBusShowUpTime () {
+    const timeInputs = document.querySelectorAll('[data-id="setBusShowUpTime"] input[type="time"]');
+    const busShowUpTime = {
+        start: timeInputs[0]?.value || '',
+        end: timeInputs[1]?.value || ''
+    };
+
+    return busShowUpTime;
 }
-
-function getUserStopId() {
-    return sessionStorage.getItem('busRemindStopItem');
-}
-
-// Firstion section's input[name="remind-time"] and it's has checked status
-function getSelectedRemindTime() {
-    const section = document.querySelector('[data-id="setCountTime"]');
-    let selectedRadio = section.querySelector('input[name="remind-time"]:checked');
-    let selectedValue;
-
-    if (selectedRadio.value === 'custom') {
-        // if the value is custom time, read data-value from '.custom-time-input'
-        const customInput = document.querySelector('.custom-time-input');
-        selectedValue = customInput.dataset.value;
-    } else {
-        // else 5、10、15
-        selectedValue = selectedRadio.value;
-    }
-    // console.log('使用者選擇的提醒時間：', selectedValue, '分鐘前');
-    return selectedValue;
-}
-
-function getRepeatWeekTime() {
-    let checkedBoxes = document.querySelectorAll('[data-id="setRepeatWeekTime"] input[type="checkbox"]:checked');
-    let selectedWeekDays = Array.from(checkedBoxes).map(checkbox => checkbox.value);
-
-    // Ex: ["Mon", "Wed", "Fri"]
-    // console.log(selectedWeekDays);
-
-    return selectedWeekDays;
-}
-
-function getBusShowUpTime() {
-    // get Bus startTime and  endTime
-    let [startInput, endInput] = document.querySelectorAll('[data-id="setBusShowUpTime"] input[type="time"]');
-    let startTime = startInput.value;
-    let endTime = endInput.value;
-
-    return [startTime, endTime];
-}
-
-// function get
-
-
-
