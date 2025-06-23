@@ -138,7 +138,7 @@ function displayStopFromDestination()
     for(let i=0; i<busStopRouteJson.stops.length; i++)
     {
         stopContainerWithOne.innerHTML +=
-            `<div class="StopItem" id="StopSequence-${busStopRouteJson.stops[i].stopSequence} data-stopid="${busStopRouteJson.stops[i].stopID}">
+            `<div class="StopItem" id="StopSequence-${busStopRouteJson.stops[i].stopSequence}" data-stopid="${busStopRouteJson.stops[i].stopID}">
                 <div class="TimeBox">
                 </div>
                 <div class="Stop-Sequence">${busStopRouteJson.stops[i].stopSequence}</div>

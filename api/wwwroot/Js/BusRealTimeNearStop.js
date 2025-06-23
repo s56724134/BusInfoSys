@@ -26,6 +26,8 @@ async function fetchAndUpdateBusRealTime() {
             localStorage.setItem('busEstimatedTimeOfArrival', JSON.stringify(estimatedData));
             updateStopItemsWithBusAndTime(0);
             updateStopItemsWithBusAndTime(1);
+
+            console.log()
         }
         else
         {
