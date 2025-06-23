@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http.HttpResults;
 using api.Interfaces;
 using api.Models.LineModel;
 using api.Dtos.LineLiff;
+using api.Dtos.Remind;
 using api.Data;
 
 namespace api.Repository
@@ -69,7 +71,7 @@ namespace api.Repository
                 throw new InvalidOperationException("已經設定過此提醒");
 
             // create remind
-            var remind = new Remind()
+            var remindModel = new Remind()
             {
                 UserId = userInfo.Sub,
                 StopId = stop.Id,
@@ -85,10 +87,29 @@ namespace api.Repository
                 }
             };
 
-            _dbcontext.Reminds.Add(remind);
+            _dbcontext.Reminds.Add(remindModel);
             await _dbcontext.SaveChangesAsync();
 
-            return remind;
+            return remindModel;
+
+        }
+
+        public async Task<List<Remind>> GetRemindByUserIdAsync(string userId)
+        {
+            // First find the user
+            var user = await _dbcontext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            if (user == null)
+            {
+                return null;
+            }
+
+            var remindModel = await _dbcontext.Reminds
+                .Where(r => r.UserId == user.Id)
+                .Include(r => r.Stop)
+                .ThenInclude(r => r.Bus)
+                .ToListAsync();
+
+            return remindModel;
 
         }
     }
