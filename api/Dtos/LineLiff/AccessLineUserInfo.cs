@@ -7,15 +7,15 @@ namespace api.Dtos.LineLiff
 {
     public class AccessLineUserInfo
     {
-        public string iss { get; set; }
-        public string sub { get; set; }
-        public string aud { get; set; }
-        public int exp { get; set; }
-        public int iat { get; set; }
-        public string nonce { get; set; }
-        public List<string> amr { get; set; }
-        public string name { get; set; }
-        public string picture { get; set; }
-        public string email { get; set; }
+        public string Iss { get; set; }
+        public string Sub { get; set; }
+        public string Aud { get; set; }
+        public int Exp { get; set; }
+        public int Iat { get; set; }
+        public string Nonce { get; set; }
+        public List<string> Amr { get; set; }
+        public string Name { get; set; }
+        public string Picture { get; set; }
+        public string Email { get; set; }
     }
 }

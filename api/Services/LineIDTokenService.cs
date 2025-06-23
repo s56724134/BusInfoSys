@@ -3,6 +3,7 @@ using System.Text.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Net.Http.Headers;
 using api.Interfaces;
 using api.Dtos.LineLiff;
 
@@ -19,16 +20,28 @@ namespace api.Services
 
         public async Task<AccessLineUserInfo> VerifyIDToken(LineIDTokenDto dto)
         {
+            var token = dto.IdToken?.Trim('"');
+            var clientId = dto.ClientId?.Trim('"');
+
+            Console.WriteLine(token);
+            Console.WriteLine(clientId);
+
             // Create body parameter
             var parameters = new Dictionary<string, string>()
             {
-                {"id_token", dto.IdToken},
-                {"client_id", dto.ClientId}
+                {"id_token", token},
+                {"client_id", clientId}
             };
+            // var idToken  = dto.IdToken;   // string
+            // var clientId = dto.ClientId;  // string
+
+            // var parameters = new Dictionary<string, string>();
+            // parameters.Add("id_token",  idToken);
+            // parameters.Add("client_id", clientId);
+
             // Use FormUrlEncodedContent make content type to application/x-www-form-urlencoded
             var formData = new FormUrlEncodedContent(parameters);
-            // get response
-            Console.WriteLine(formData);
+            formData.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
 
             try
             {
@@ -37,11 +50,15 @@ namespace api.Services
                 Console.WriteLine("成功回傳: " + responseContent);
                 if (response.IsSuccessStatusCode)
                 {
-                    // var responseContent = await response.Content.ReadAsStringAsync();
-                    // Console.WriteLine("成功回傳: " + responseContent);
-                    // ✅ 可進一步做 JSON 解析
-                    var data = JsonSerializer.Deserialize<AccessLineUserInfo>(responseContent);
+                    var data = JsonSerializer.Deserialize<AccessLineUserInfo>(
+                                responseContent,
+                                new JsonSerializerOptions()
+                                {
+                                    PropertyNameCaseInsensitive = true
+                                });
                     return data;
+                    // string jsonString = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
+                    // Console.WriteLine("✅ data 內容如下：\n" + jsonString);
                 }
                 else
                 {

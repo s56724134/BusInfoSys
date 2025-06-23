@@ -12,7 +12,7 @@ using api.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250618063835_InitialCreate")]
+    [Migration("20250621144944_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -58,8 +58,9 @@ namespace api.Migrations
                     b.Property<int>("StopId")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -87,8 +88,9 @@ namespace api.Migrations
                     b.Property<int>("StopId")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -122,9 +124,8 @@ namespace api.Migrations
 
             modelBuilder.Entity("api.Models.LineModel.User", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");

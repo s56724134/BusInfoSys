@@ -28,7 +28,7 @@ namespace api.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Profile = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LoginTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -65,7 +65,7 @@ namespace api.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     StopId = table.Column<int>(type: "int", nullable: false),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifyTime = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -93,7 +93,7 @@ namespace api.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     StopId = table.Column<int>(type: "int", nullable: false),
                     RemindTime_SelectedRemindTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RemindTime_RepeatWeekTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
