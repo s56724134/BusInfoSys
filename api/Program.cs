@@ -18,7 +18,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "BusInfoSys API", Version = "v1" });
 
-    // ✅ 加入 JWT Bearer 支援
+    // 加入 JWT Bearer 支援
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = "Please enter a valid token",
@@ -28,7 +28,7 @@ builder.Services.AddSwaggerGen(c =>
         Scheme = "Bearer"
     });
 
-    // ✅ 套用到所有需要授權的 API
+    // 套用到所有需要授權的 API
     c.AddSecurityRequirement(new OpenApiSecurityRequirement{
         {
             new OpenApiSecurityScheme{
@@ -48,16 +48,27 @@ builder.Services.AddControllers()
         options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
     });
 
-// Dependency Injection
+// Register logging Service
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
+
+// Dependency Injection setting
 builder.Services.AddScoped<ITDXTokenService, TDXTokenService>();
+builder.Services.AddScoped<IRemindRepository, RemindRepository>();
 builder.Services.AddHttpClient<IBusInfoService, BusInfoService>();
 builder.Services.AddHttpClient<ILineIDTokenService, LineIDTokenService>();
-builder.Services.AddScoped<IRemindRepository, RemindRepository>();
 
+builder.Services.AddHttpClient();
+builder.Services.AddScoped<ILineMessageService, LineMessageService>();
+
+// Background Service
+builder.Services.AddHostedService<ReminderBackgroundService>();
 // Register DBContext that reference "appsetting.Development.json"
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Authenticate Service
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
