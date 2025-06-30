@@ -4,8 +4,8 @@
   "dockerComposeFile": [
     "../docker-compose.yml"
   ],
-  "service": "webapi",
-  "workspaceFolder": "/app",
+  "service": "devcontainer",
+  "workspaceFolder": "/workspace",
   "settings": {
     // color theme
     "workbench.colorTheme": "One Dark Pro",
@@ -80,7 +80,7 @@
     "zhuangtongfa.material-theme",
     "ritwickdey.liveserver"
   ],
-  "forwardPorts": [5289, 7074, 4040],
+  "forwardPorts": [5289, 7074, 4040, 3000],
   "portsAttributes": {
     "5289": {
       "label": "HTTP (WebAPI)",

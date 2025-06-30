@@ -139,3 +139,14 @@ app.MapControllers();
 
 app.Run();
 
+// builder.Services.AddCors(options =>
+// {
+//     options.AddPolicy("AllowReact", policy =>
+//     {
+//         policy.WithOrigins("http://localhost:3000") // React 的開發網址
+//               .AllowAnyHeader()
+//               .AllowAnyMethod();
+//     });
+// });
+
+// app.UseCors("AllowReact");
